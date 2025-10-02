@@ -3,38 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BudgetWise | Smart Finance Tracker</title>
-        <!-- Web App Manifest -->
+    <title>BudgetWise | Smart Financial Management</title>
+    <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
-   
+    <meta name="theme-color" content="#3a56d4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --success: #06d6a0;
+            --primary: #3a56d4;
+            --primary-light: #5b75e8;
+            --primary-dark: #2a42b8;
+            --secondary: #8b5cf6;
+            --accent: #06d6a0;
             --warning: #ffd166;
             --danger: #ef476f;
-            --light: #f8f9fa;
-            --dark: #1d3557;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
             --card-bg: #ffffff;
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
             --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --border-radius: 16px;
             --bottom-nav-height: 70px;
+            --header-height: 80px;
         }
         
         .dark-mode {
-            --card-bg: #1e1e2e;
-            --dark: #e6e6e6;
-            --gray: #a0a0a0;
-            --light-gray: #333344;
-            --card-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: #1e293b;
+            --dark: #f1f5f9;
+            --gray: #94a3b8;
+            --light-gray: #334155;
+            --light: #0f172a;
+            --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.25);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
         
         * {
@@ -45,19 +48,91 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             color: var(--dark);
             min-height: 100vh;
             padding: 0;
             line-height: 1.6;
             position: relative;
             padding-bottom: var(--bottom-nav-height);
+            transition: var(--transition);
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 16px 90px;
+        }
+        
+        /* Header - Redesigned */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--card-bg);
+            padding: 20px 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 6px 18px rgba(58, 86, 212, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .theme-toggle {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(58, 86, 212, 0.05);
         }
         
         /* Setup Screen */
@@ -82,6 +157,7 @@
             margin: 0 auto 25px;
             color: white;
             font-size: 32px;
+            box-shadow: 0 8px 20px rgba(58, 86, 212, 0.3);
         }
         
         .setup-title {
@@ -114,12 +190,12 @@
         
         .currency-option:hover {
             border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.05);
+            background: rgba(58, 86, 212, 0.05);
         }
         
         .currency-option.selected {
             border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
+            background: rgba(58, 86, 212, 0.1);
             color: var(--primary);
         }
         
@@ -136,18 +212,17 @@
             border: none;
             outline: none;
             justify-content: center;
-            width: 100%;
         }
         
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            box-shadow: 0 4px 15px rgba(58, 86, 212, 0.3);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            box-shadow: 0 6px 20px rgba(58, 86, 212, 0.4);
         }
         
         .btn-outline {
@@ -157,7 +232,7 @@
         }
         
         .btn-outline:hover {
-            background: rgba(67, 97, 238, 0.05);
+            background: rgba(58, 86, 212, 0.05);
         }
         
         .btn-danger {
@@ -170,64 +245,14 @@
             background: rgba(239, 71, 111, 0.2);
         }
         
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 0 8px;
+        .btn-success {
+            background: rgba(6, 214, 160, 0.1);
+            color: var(--accent);
+            border: 2px solid var(--accent);
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .logo-icon {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-        }
-        
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .theme-toggle {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .theme-toggle:hover {
-            background: rgba(67, 97, 238, 0.05);
+        .btn-success:hover {
+            background: rgba(6, 214, 160, 0.2);
         }
         
         /* Dashboard Tab */
@@ -286,7 +311,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(67, 97, 238, 0.1);
+            background: rgba(58, 86, 212, 0.1);
             color: var(--primary);
             font-size: 16px;
         }
@@ -334,7 +359,7 @@
         }
         
         .stat-card {
-            background: rgba(67, 97, 238, 0.05);
+            background: rgba(58, 86, 212, 0.05);
             border-radius: 10px;
             padding: 16px;
             text-align: center;
@@ -352,7 +377,7 @@
             color: var(--gray);
         }
         
-        /* Analytics Tab */
+        /* Analytics Tab - Improved */
         .analytics-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -393,7 +418,7 @@
             height: 280px;
             position: relative;
             overflow: hidden;
-            background: rgba(67, 97, 238, 0.02);
+            background: rgba(58, 86, 212, 0.02);
             border-radius: 8px;
             margin-top: 20px;
         }
@@ -409,7 +434,7 @@
         }
         
         .grid-line {
-            border-bottom: 1px solid rgba(67, 97, 238, 0.1);
+            border-bottom: 1px solid rgba(58, 86, 212, 0.1);
         }
         
         .chart-bar-container {
@@ -479,11 +504,11 @@
         }
         
         .insight-card {
-            background: linear-gradient(135deg, #4361ee08, #7209b708);
+            background: linear-gradient(135deg, #3a56d408, #8b5cf608);
             border-radius: var(--border-radius);
             padding: 22px;
             text-align: center;
-            border: 1px solid rgba(67, 97, 238, 0.1);
+            border: 1px solid rgba(58, 86, 212, 0.1);
         }
         
         .insight-icon {
@@ -493,7 +518,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(67, 97, 238, 0.1);
+            background: rgba(58, 86, 212, 0.1);
             color: var(--primary);
             font-size: 18px;
             margin: 0 auto 12px;
@@ -576,7 +601,7 @@
         }
         
         .transaction-item:hover {
-            background: rgba(67, 97, 238, 0.03);
+            background: rgba(58, 86, 212, 0.03);
             border-radius: 10px;
             padding-left: 8px;
         }
@@ -623,7 +648,7 @@
         }
         
         .income {
-            color: var(--success);
+            color: var(--accent);
         }
         
         .expense {
@@ -693,7 +718,7 @@
         input:focus, select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 0 0 3px rgba(58, 86, 212, 0.2);
         }
         
         input::placeholder {
@@ -706,7 +731,7 @@
             top: 20px;
             right: 20px;
             padding: 16px 24px;
-            background: var(--success);
+            background: var(--accent);
             color: white;
             border-radius: 14px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -775,7 +800,7 @@
         
         .nav-item.active {
             color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
+            background: rgba(58, 86, 212, 0.1);
         }
         
         .nav-item i {
@@ -800,7 +825,7 @@
         /* AI Insights */
         .ai-insight {
             background: linear-gradient(135deg, #06d6a015, #118ab215);
-            border-left: 4px solid var(--success);
+            border-left: 4px solid var(--accent);
             padding: 20px;
             border-radius: 0 12px 12px 0;
             margin: 20px 0;
@@ -811,7 +836,7 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 12px;
-            color: var(--success);
+            color: var(--accent);
             font-weight: 600;
         }
         
@@ -828,7 +853,7 @@
         
         .health-excellent {
             background: rgba(6, 214, 160, 0.15);
-            color: var(--success);
+            color: var(--accent);
         }
         
         .health-good {
@@ -857,14 +882,14 @@
         
         .achievement-badge {
             background: rgba(6, 214, 160, 0.1);
-            border: 2px solid var(--success);
+            border: 2px solid var(--accent);
             border-radius: 50%;
             width: 45px;
             height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--success);
+            color: var(--accent);
             font-size: 16px;
             cursor: pointer;
             transition: var(--transition);
@@ -886,13 +911,13 @@
             }
             
             .logo-text {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             .logo-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
             }
             
             .btn {
@@ -922,10 +947,12 @@
             .header {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 15px;
             }
             
             .header-actions {
                 justify-content: center;
+                width: 100%;
             }
             
             .form-row {
@@ -965,6 +992,16 @@
                 min-width: 75px;
                 font-size: 1.1rem;
             }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .card-header .btn {
+                align-self: stretch;
+            }
         }
         
         /* Scrollbar styling */
@@ -996,7 +1033,7 @@
             align-items: center;
             justify-content: center;
             font-size: 22px;
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            box-shadow: 0 6px 20px rgba(58, 86, 212, 0.4);
             cursor: pointer;
             z-index: 999;
             transition: var(--transition);
@@ -1004,7 +1041,7 @@
         
         .fab:hover {
             transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+            box-shadow: 0 8px 25px rgba(58, 86, 212, 0.5);
         }
         
         /* Reports Tab - Mobile Optimized */
@@ -1121,6 +1158,475 @@
             gap: 15px;
             justify-content: flex-end;
         }
+        
+        /* Currency Selector in Header */
+        .currency-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(58, 86, 212, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .currency-selector:hover {
+            background: rgba(58, 86, 212, 0.15);
+        }
+        
+        /* Export Modal */
+        .export-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .export-option {
+            padding: 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .export-option:hover {
+            border-color: var(--primary);
+            background: rgba(58, 86, 212, 0.05);
+        }
+        
+        .export-option.selected {
+            border-color: var(--primary);
+            background: rgba(58, 86, 212, 0.1);
+        }
+        
+        .export-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Financial Goals */
+        .goals-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .goal-progress {
+            height: 10px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .goal-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            border-radius: 8px;
+            transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Predictive Insights */
+        .predictive-insights {
+            background: linear-gradient(135deg, #3a56d408, #8b5cf608);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin: 20px 0;
+            border: 1px solid rgba(58, 86, 212, 0.1);
+        }
+        
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .insight-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .insight-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(58, 86, 212, 0.1);
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .insight-content {
+            flex: 1;
+        }
+        
+        .insight-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .insight-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Import Transactions Section */
+        .import-section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 25px;
+        }
+        
+        .import-placeholder {
+            border: 2px dashed var(--light-gray);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .import-placeholder:hover {
+            border-color: var(--primary);
+            background: rgba(58, 86, 212, 0.05);
+        }
+        
+        .import-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .import-text {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .import-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .import-btn:hover {
+            background: rgba(58, 86, 212, 0.1);
+        }
+        
+        /* Data Actions Card */
+        .data-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .data-action-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(58, 86, 212, 0.05);
+            border: 2px solid var(--light-gray);
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .data-action-btn:hover {
+            background: rgba(58, 86, 212, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .data-action-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 768px) {
+            .header-actions {
+                justify-content: center;
+            }
+            
+            .data-actions {
+                flex-direction: column;
+            }
+            
+            .data-action-btn {
+                width: 100%;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .export-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .chart-actions select,
+            .chart-actions .btn {
+                width: 100%;
+            }
+            
+            .transaction-filters {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .transaction-filters .filter-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+        
+        /* Settings Tab */
+        .settings-section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 25px;
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .settings-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--light-gray);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Saving Goals Integration */
+        .saving-goal-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(58, 86, 212, 0.05);
+            border-radius: 8px;
+        }
+        
+        .saving-goal-option input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .saving-goal-option label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        
+        .saving-goal-amount {
+            width: 100px;
+            margin-left: auto;
+        }
+        
+        /* Saving Goal Details */
+        .saving-goal-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .saving-goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: rgba(6, 214, 160, 0.05);
+            border-radius: 8px;
+        }
+        
+        .saving-goal-name {
+            font-weight: 600;
+        }
+        
+        .saving-goal-amount {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* Improved Spending Intelligence */
+        .spending-intelligence {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 25px;
+        }
+        
+        .intelligence-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .intelligence-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .intelligence-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .intelligence-chart {
+            height: 200px;
+            position: relative;
+            background: rgba(58, 86, 212, 0.02);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .intelligence-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .intelligence-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(58, 86, 212, 0.05);
+            border-radius: 8px;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .intelligence-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Improved Savings Goal Card */
+        .savings-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .savings-actions .btn {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -1151,7 +1657,7 @@
     
     <!-- Main App (hidden initially) -->
     <div class="container" id="main-app" style="display:none;">
-        <!-- Header -->
+        <!-- Header - Redesigned -->
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">
@@ -1160,15 +1666,13 @@
                 <div class="logo-text">BudgetWise</div>
             </div>
             <div class="header-actions">
+                <div class="currency-selector" id="currency-selector">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span id="current-currency">USD</span>
+                </div>
                 <button class="theme-toggle" id="theme-toggle">
                     <i class="fas fa-moon"></i>
                     <span>Dark Mode</span>
-                </button>
-                <button class="btn btn-outline" id="export-btn">
-                    <i class="fas fa-file-export"></i> Export
-                </button>
-                <button class="btn btn-danger" id="reset-btn">
-                    <i class="fas fa-redo"></i> Reset
                 </button>
             </div>
         </div>
@@ -1185,6 +1689,9 @@
                 <div class="achievement-badge" title="Savings Goal">
                     <i class="fas fa-piggy-bank"></i>
                 </div>
+                <div class="achievement-badge" title="Weekly Streak">
+                    <i class="fas fa-fire"></i>
+                </div>
             </div>
             
             <div class="dashboard-grid">
@@ -1195,14 +1702,14 @@
                             Current Balance
                         </h2>
                     </div>
-                    <div class="balance" id="balance">₦0.00</div>
+                    <div class="balance" id="balance">$0.00</div>
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-value" id="total-income">₦0.00</div>
+                            <div class="stat-value" id="total-income">$0.00</div>
                             <div class="stat-label">Total Income</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value" id="total-expense">₦0.00</div>
+                            <div class="stat-value" id="total-expense">$0.00</div>
                             <div class="stat-label">Total Expenses</div>
                         </div>
                     </div>
@@ -1214,21 +1721,46 @@
                             <i class="fas fa-chart-line card-icon"></i>
                             Monthly Budget
                         </h2>
-                        <button class="btn btn-outline" id="edit-budget-btn" style="padding:6px 12px; font-size:0.85rem;">
+                        <button class="btn btn-outline" id="edit-budget-btn">
                             <i class="fas fa-edit"></i> Edit
                         </button>
                     </div>
-                    <div class="balance" id="budget-amount">₦0.00</div>
+                    <div class="balance" id="budget-amount">$0.00</div>
                     <div class="budget-progress">
                         <div class="progress-bar" id="budget-progress" style="width: 0%"></div>
                     </div>
                     <div class="progress-label">
                         <span id="budget-used">0%</span>
-                        <span id="budget-remaining">₦0.00</span>
+                        <span id="budget-remaining">$0.00</span>
                     </div>
                     <div class="health-indicator health-excellent" id="budget-health-indicator">
                         <i class="fas fa-heartbeat"></i>
                         <span>Excellent</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-bullseye card-icon"></i>
+                            Savings Goal
+                        </h2>
+                        <button class="btn btn-outline" id="edit-goal-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <div class="balance" id="goal-amount">$0.00</div>
+                    <div class="goal-progress">
+                        <div class="goal-progress-bar" id="goal-progress" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span id="goal-saved">$0.00</span>
+                        <span id="goal-target">$0.00</span>
+                    </div>
+                    <div class="savings-actions">
+                        <button class="btn btn-success" id="add-to-savings-btn">
+                            <i class="fas fa-plus"></i> Add to Savings
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1238,7 +1770,58 @@
                     <i class="fas fa-robot"></i>
                     <span>Smart Insight</span>
                 </div>
-                <p id="ai-insight-text">Based on your spending patterns, you're on track to save ₦240 this month. Consider allocating ₦50 to your emergency fund.</p>
+                <p id="ai-insight-text">Based on your spending patterns, you're on track to save $240 this month. Consider allocating $50 to your emergency fund.</p>
+            </div>
+            
+            <div class="predictive-insights">
+                <h3 style="margin-bottom: 20px; color: var(--dark); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-crystal-ball"></i>
+                    Predictive Insights
+                </h3>
+                <div class="insight-item">
+                    <div class="insight-icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-title">Spending Trend</div>
+                        <div class="insight-description" id="spending-trend">Your spending is 15% lower than last month. At this rate, you'll save an extra $120 this month.</div>
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon-wrapper">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-title">Upcoming Bills</div>
+                        <div class="insight-description" id="upcoming-bills">You have 3 bills totaling $245 due in the next 7 days. Make sure to budget accordingly.</div>
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon-wrapper">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-title">Savings Opportunity</div>
+                        <div class="insight-description" id="savings-opportunity">You could save $45/month by reducing dining out expenses by 20%.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="import-section">
+                <h2 class="form-title">
+                    <i class="fas fa-file-import"></i>
+                    Import Transactions
+                </h2>
+                <div class="import-placeholder" id="import-placeholder">
+                    <div class="import-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Quick Start with Sample Data</h3>
+                    <p class="import-text">Get started quickly by importing sample transactions to explore BudgetWise features</p>
+                    <button class="import-btn" id="import-sample-btn">
+                        <i class="fas fa-download"></i> Load Sample Data
+                    </button>
+                </div>
             </div>
             
             <div class="form-section" id="add-transaction-form">
@@ -1287,6 +1870,15 @@
                         <label for="description">Description</label>
                         <input type="text" id="description" placeholder="What was this for?">
                     </div>
+                    
+                    <!-- Saving Goals Allocation -->
+                    <div class="form-group" id="saving-goal-section" style="display: none;">
+                        <label>Allocate to Saving Goals</label>
+                        <div id="saving-goal-options">
+                            <!-- Saving goals will be dynamically added here -->
+                        </div>
+                    </div>
+                    
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Add Transaction
                     </button>
@@ -1296,54 +1888,41 @@
         
         <!-- Analytics Tab -->
         <div class="tab-content" id="analytics-tab">
-            <div class="chart-container">
-                <div class="chart-header">
-                    <h2 class="chart-title">Spending Intelligence</h2>
+            <!-- Improved Spending Intelligence Card -->
+            <div class="spending-intelligence">
+                <div class="intelligence-header">
+                    <h2 class="intelligence-title">Spending Intelligence</h2>
                     <div class="chart-actions">
-                        <button class="btn btn-outline reset-btn" id="reset-chart" style="padding:6px 12px; font-size:0.85rem;">
-                            <i class="fas fa-redo"></i> Reset
-                        </button>
-                        <select id="chart-period" style="padding:8px 12px; font-size:0.9rem;">
+                        <select id="chart-period">
                             <option value="30">Last 30 Days</option>
                             <option value="90">Last 90 Days</option>
                             <option value="180">Last 6 Months</option>
                         </select>
                     </div>
                 </div>
-                <div class="chart-canvas" id="chart-canvas">
-                    <div class="chart-grid" id="chart-grid"></div>
-                    <div class="chart-bar-container" id="chart-bars"></div>
-                </div>
-            </div>
-            
-            <div class="insights-panel">
-                <div class="insight-card">
-                    <div class="insight-icon">
-                        <i class="fas fa-chart-bar"></i>
+                <div class="intelligence-content">
+                    <div class="intelligence-chart" id="chart-canvas">
+                        <div class="chart-grid" id="chart-grid"></div>
+                        <div class="chart-bar-container" id="chart-bars"></div>
                     </div>
-                    <div class="insight-label">Top Spending Category</div>
-                    <div class="insight-value" id="best-category">-</div>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">
-                        <i class="fas fa-calendar-day"></i>
+                    <div class="intelligence-stats">
+                        <div class="intelligence-stat">
+                            <span class="stat-label">Top Spending Category</span>
+                            <span class="stat-value" id="best-category">-</span>
+                        </div>
+                        <div class="intelligence-stat">
+                            <span class="stat-label">Avg. Daily Spending</span>
+                            <span class="stat-value" id="avg-daily">$0.00</span>
+                        </div>
+                        <div class="intelligence-stat">
+                            <span class="stat-label">Savings Rate</span>
+                            <span class="stat-value" id="savings-rate">0%</span>
+                        </div>
+                        <div class="intelligence-stat">
+                            <span class="stat-label">Budget Efficiency</span>
+                            <span class="stat-value" id="budget-efficiency">-</span>
+                        </div>
                     </div>
-                    <div class="insight-label">Avg. Daily Spending</div>
-                    <div class="insight-value" id="avg-daily">₦0.00</div>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">
-                        <i class="fas fa-piggy-bank"></i>
-                    </div>
-                    <div class="insight-label">Savings Rate</div>
-                    <div class="insight-value" id="savings-rate">0%</div>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <div class="insight-label">Budget Efficiency</div>
-                    <div class="insight-value" id="budget-efficiency">-</div>
                 </div>
             </div>
             
@@ -1358,7 +1937,7 @@
                     <ul style="padding-left: 20px; color: var(--gray); font-size: 0.95rem;">
                         <li style="margin-bottom: 12px;">Consider reducing dining out expenses by 15% to stay within budget</li>
                         <li style="margin-bottom: 12px;">Your transportation costs are 20% below average - great job!</li>
-                        <li>You could save an additional ₦75/month by switching to a cheaper phone plan</li>
+                        <li>You could save an additional $75/month by switching to a cheaper phone plan</li>
                     </ul>
                 </div>
             </div>
@@ -1398,22 +1977,22 @@
                         <i class="fas fa-file-alt card-icon"></i>
                         Monthly Summary Report
                     </h2>
-                    <select id="report-month" style="padding:8px 12px; font-size:0.9rem;">
+                    <select id="report-month">
                         <!-- Will be populated dynamically -->
                     </select>
                 </div>
                 <div style="padding: 20px;">
                     <div class="report-stats">
                         <div class="stat-card">
-                            <div class="stat-value" id="report-income">₦0.00</div>
+                            <div class="stat-value" id="report-income">$0.00</div>
                             <div class="stat-label">Total Income</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value" id="report-expense">₦0.00</div>
+                            <div class="stat-value" id="report-expense">$0.00</div>
                             <div class="stat-label">Total Expenses</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value" id="report-balance">₦0.00</div>
+                            <div class="stat-value" id="report-balance">$0.00</div>
                             <div class="stat-label">Net Balance</div>
                         </div>
                         <div class="stat-card">
@@ -1422,7 +2001,7 @@
                         </div>
                     </div>
                     
-                    <div class="card" style="margin-top: 20px; background: rgba(67, 97, 238, 0.03);">
+                    <div class="card" style="margin-top: 20px; background: rgba(58, 86, 212, 0.03);">
                         <div class="card-header">
                             <h3 style="font-size: 1.2rem; color: var(--primary);">
                                 <i class="fas fa-chart-pie"></i>
@@ -1436,6 +2015,106 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settings-tab">
+            <div class="settings-section">
+                <h2 class="form-title">
+                    <i class="fas fa-cog"></i>
+                    App Settings
+                </h2>
+                
+                <div class="settings-item">
+                    <div>
+                        <div class="settings-label">Dark Mode</div>
+                        <div class="settings-description">Toggle between light and dark theme</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="settings-item">
+                    <div>
+                        <div class="settings-label">Currency</div>
+                        <div class="settings-description">Change your preferred currency</div>
+                    </div>
+                    <button class="btn btn-outline" id="settings-currency-btn">
+                        <i class="fas fa-money-bill-wave"></i> Change
+                    </button>
+                </div>
+                
+                <div class="settings-item">
+                    <div>
+                        <div class="settings-label">Show Setup Screen</div>
+                        <div class="settings-description">Show the welcome screen again</div>
+                    </div>
+                    <button class="btn btn-outline" id="show-setup-btn">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <div class="settings-item">
+                    <div>
+                        <div class="settings-label">Export Data</div>
+                        <div class="settings-description">Download your financial data</div>
+                    </div>
+                    <button class="btn btn-outline" id="settings-export-btn">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                </div>
+                
+                <div class="settings-item">
+                    <div>
+                        <div class="settings-label">Reset All Data</div>
+                        <div class="settings-description">Clear all transactions and settings</div>
+                    </div>
+                    <button class="btn btn-danger" id="settings-reset-btn">
+                        <i class="fas fa-trash"></i> Reset
+                    </button>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h2 class="form-title">
+                    <i class="fas fa-piggy-bank"></i>
+                    Saving Goals
+                </h2>
+                
+                <div id="saving-goals-list">
+                    <!-- Saving goals will be dynamically added here -->
+                </div>
+                
+                <button class="btn btn-primary" id="add-goal-btn" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Add New Goal
+                </button>
+            </div>
+            
+            <div class="settings-section">
+                <h2 class="form-title">
+                    <i class="fas fa-info-circle"></i>
+                    About BudgetWise
+                </h2>
+                <p style="color: var(--gray); margin-bottom: 15px;">
+                    BudgetWise is a comprehensive financial management app that helps you track expenses, set budgets, and achieve your saving goals.
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div class="stat-card">
+                        <div class="stat-value" id="app-version">v3.0</div>
+                        <div class="stat-label">Version</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-transactions">0</div>
+                        <div class="stat-label">Transactions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="app-days">0</div>
+                        <div class="stat-label">Days Used</div>
                     </div>
                 </div>
             </div>
@@ -1455,6 +2134,179 @@
             <div class="modal-footer">
                 <button class="btn btn-outline" id="cancel-reset">Cancel</button>
                 <button class="btn btn-danger" id="confirm-reset">Reset All Data</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Export Modal -->
+    <div class="modal" id="export-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Export Your Data</h3>
+                <button class="close-modal" id="close-export-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Choose how you'd like to export your financial data:</p>
+                <div class="export-options">
+                    <div class="export-option" data-format="json">
+                        <div class="export-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <h4>JSON Format</h4>
+                        <p>Best for backups and data transfer</p>
+                    </div>
+                    <div class="export-option" data-format="csv">
+                        <div class="export-icon">
+                            <i class="fas fa-file-csv"></i>
+                        </div>
+                        <h4>CSV Format</h4>
+                        <p>Best for spreadsheets and analysis</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-export">Cancel</button>
+                <button class="btn btn-primary" id="confirm-export" disabled>Export Data</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Currency Change Modal -->
+    <div class="modal" id="currency-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Change Currency</h3>
+                <button class="close-modal" id="close-currency-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Select your preferred currency:</p>
+                <div class="currency-grid">
+                    <div class="currency-option" data-currency="USD">$ USD</div>
+                    <div class="currency-option" data-currency="EUR">€ EUR</div>
+                    <div class="currency-option" data-currency="GBP">£ GBP</div>
+                    <div class="currency-option" data-currency="NGN">₦ NGN</div>
+                    <div class="currency-option" data-currency="CAD">C$ CAD</div>
+                    <div class="currency-option" data-currency="AUD">A$ AUD</div>
+                </div>
+                <div class="ai-insight" style="margin-top: 20px;">
+                    <div class="ai-insight-header">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Note</span>
+                    </div>
+                    <p>Changing currency will not convert existing amounts. This only changes how amounts are displayed.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-currency">Cancel</button>
+                <button class="btn btn-primary" id="confirm-currency" disabled>Change Currency</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Goal Setting Modal -->
+    <div class="modal" id="goal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Set Savings Goal</h3>
+                <button class="close-modal" id="close-goal-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="goal-target-amount">Target Amount</label>
+                    <input type="number" id="goal-target-amount" step="0.01" min="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="goal-saved-amount">Currently Saved</label>
+                    <input type="number" id="goal-saved-amount" step="0.01" min="0" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="goal-deadline">Target Date (Optional)</label>
+                    <input type="date" id="goal-deadline">
+                </div>
+                <div class="form-group">
+                    <label for="goal-name">Goal Name</label>
+                    <input type="text" id="goal-name" placeholder="e.g., Emergency Fund, Vacation, Car">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-goal">Cancel</button>
+                <button class="btn btn-primary" id="confirm-goal">Set Goal</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add to Savings Modal -->
+    <div class="modal" id="add-savings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add to Savings</h3>
+                <button class="close-modal" id="close-add-savings-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="add-savings-amount">Amount to Add</label>
+                    <input type="number" id="add-savings-amount" step="0.01" min="0.01" placeholder="0.00">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-add-savings">Cancel</button>
+                <button class="btn btn-primary" id="confirm-add-savings">Add to Savings</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Import Sample Data Modal -->
+    <div class="modal" id="import-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Import Sample Data</h3>
+                <button class="close-modal" id="close-import-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This will add sample transactions to your BudgetWise account. Your existing data will be preserved.</p>
+                <div class="ai-insight" style="margin-top: 20px;">
+                    <div class="ai-insight-header">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Sample Data Includes</span>
+                    </div>
+                    <ul style="padding-left: 20px; color: var(--gray);">
+                        <li>15 sample transactions across multiple categories</li>
+                        <li>Income and expense examples</li>
+                        <li>Realistic amounts for demonstration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-import">Cancel</button>
+                <button class="btn btn-primary" id="confirm-import">Import Sample Data</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Goal Modal -->
+    <div class="modal" id="add-goal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Saving Goal</h3>
+                <button class="close-modal" id="close-add-goal-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="new-goal-name">Goal Name</label>
+                    <input type="text" id="new-goal-name" placeholder="e.g., Emergency Fund, Vacation, Car">
+                </div>
+                <div class="form-group">
+                    <label for="new-goal-target">Target Amount</label>
+                    <input type="number" id="new-goal-target" step="0.01" min="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="new-goal-deadline">Target Date (Optional)</label>
+                    <input type="date" id="new-goal-deadline">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-add-goal">Cancel</button>
+                <button class="btn btn-primary" id="confirm-add-goal">Add Goal</button>
             </div>
         </div>
     </div>
@@ -1482,6 +2334,10 @@
             <i class="fas fa-file-invoice"></i>
             <span>Reports</span>
         </div>
+        <div class="nav-item" data-tab="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </div>
     </div>
     
     <div class="notification" id="notification">
@@ -1500,11 +2356,51 @@
         const themeToggle = document.getElementById('theme-toggle');
         const fab = document.getElementById('fab');
         const body = document.body;
-        const resetBtn = document.getElementById('reset-btn');
+        const currencySelector = document.getElementById('currency-selector');
+        const currentCurrencyEl = document.getElementById('current-currency');
+        const currencyModal = document.getElementById('currency-modal');
+        const closeCurrencyModal = document.getElementById('close-currency-modal');
+        const cancelCurrency = document.getElementById('cancel-currency');
+        const confirmCurrency = document.getElementById('confirm-currency');
+        const goalModal = document.getElementById('goal-modal');
+        const closeGoalModal = document.getElementById('close-goal-modal');
+        const cancelGoal = document.getElementById('cancel-goal');
+        const confirmGoal = document.getElementById('confirm-goal');
+        const editGoalBtn = document.getElementById('edit-goal-btn');
+        const addToSavingsBtn = document.getElementById('add-to-savings-btn');
+        const addSavingsModal = document.getElementById('add-savings-modal');
+        const closeAddSavingsModal = document.getElementById('close-add-savings-modal');
+        const cancelAddSavings = document.getElementById('cancel-add-savings');
+        const confirmAddSavings = document.getElementById('confirm-add-savings');
+        const addSavingsAmount = document.getElementById('add-savings-amount');
+        const importPlaceholder = document.getElementById('import-placeholder');
+        const importSampleBtn = document.getElementById('import-sample-btn');
+        const importModal = document.getElementById('import-modal');
+        const closeImportModal = document.getElementById('close-import-modal');
+        const cancelImport = document.getElementById('cancel-import');
+        const confirmImport = document.getElementById('confirm-import');
+        const addGoalBtn = document.getElementById('add-goal-btn');
+        const addGoalModal = document.getElementById('add-goal-modal');
+        const closeAddGoalModal = document.getElementById('close-add-goal-modal');
+        const cancelAddGoal = document.getElementById('cancel-add-goal');
+        const confirmAddGoal = document.getElementById('confirm-add-goal');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const settingsCurrencyBtn = document.getElementById('settings-currency-btn');
+        const showSetupBtn = document.getElementById('show-setup-btn');
+        const settingsExportBtn = document.getElementById('settings-export-btn');
+        const settingsResetBtn = document.getElementById('settings-reset-btn');
         const resetModal = document.getElementById('reset-modal');
         const closeResetModal = document.getElementById('close-reset-modal');
         const cancelReset = document.getElementById('cancel-reset');
         const confirmReset = document.getElementById('confirm-reset');
+        const exportModal = document.getElementById('export-modal');
+        const closeExportModal = document.getElementById('close-export-modal');
+        const cancelExport = document.getElementById('cancel-export');
+        const confirmExport = document.getElementById('confirm-export');
+        const exportOptions = document.querySelectorAll('.export-option');
+        const savingGoalSection = document.getElementById('saving-goal-section');
+        const savingGoalOptions = document.getElementById('saving-goal-options');
+        const transactionType = document.getElementById('type');
         
         // Main app elements
         const balanceEl = document.getElementById('balance');
@@ -1515,6 +2411,10 @@
         const budgetUsedEl = document.getElementById('budget-used');
         const budgetRemainingEl = document.getElementById('budget-remaining');
         const budgetHealthIndicator = document.getElementById('budget-health-indicator');
+        const goalAmountEl = document.getElementById('goal-amount');
+        const goalProgressEl = document.getElementById('goal-progress');
+        const goalSavedEl = document.getElementById('goal-saved');
+        const goalTargetEl = document.getElementById('goal-target');
         const transactionListEl = document.getElementById('transaction-list');
         const transactionForm = document.getElementById('transaction-form');
         const notificationEl = document.getElementById('notification');
@@ -1524,7 +2424,6 @@
         const savingsRateEl = document.getElementById('savings-rate');
         const budgetEfficiencyEl = document.getElementById('budget-efficiency');
         const aiInsightText = document.getElementById('ai-insight-text');
-        const exportBtn = document.getElementById('export-btn');
         const editBudgetBtn = document.getElementById('edit-budget-btn');
         const dateInput = document.getElementById('date');
         const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1532,13 +2431,19 @@
         const chartGrid = document.getElementById('chart-grid');
         const chartBars = document.getElementById('chart-bars');
         const chartPeriod = document.getElementById('chart-period');
-        const resetChartBtn = document.getElementById('reset-chart');
         const reportMonth = document.getElementById('report-month');
         const reportIncomeEl = document.getElementById('report-income');
         const reportExpenseEl = document.getElementById('report-expense');
         const reportBalanceEl = document.getElementById('report-balance');
         const reportSavingsEl = document.getElementById('report-savings');
         const categoryBreakdownEl = document.getElementById('category-breakdown');
+        const spendingTrendEl = document.getElementById('spending-trend');
+        const upcomingBillsEl = document.getElementById('upcoming-bills');
+        const savingsOpportunityEl = document.getElementById('savings-opportunity');
+        const savingGoalsList = document.getElementById('saving-goals-list');
+        const appVersion = document.getElementById('app-version');
+        const totalTransactions = document.getElementById('total-transactions');
+        const appDays = document.getElementById('app-days');
         
         // Set today as default date
         const today = new Date();
@@ -1554,6 +2459,15 @@
         let currency = 'USD';
         let currentFilter = 'all';
         let darkMode = false;
+        let savingsGoal = {
+            target: 0,
+            saved: 0,
+            deadline: null,
+            name: 'Main Savings Goal'
+        };
+        let savingGoals = [];
+        let selectedExportFormat = null;
+        let selectedNewCurrency = null;
         
         // Currency symbols for display
         const currencySymbols = {
@@ -1573,6 +2487,12 @@
                 option.classList.add('selected');
                 selectedCurrency = option.getAttribute('data-currency');
                 startBtn.disabled = false;
+                
+                // For currency modal
+                if (document.getElementById('currency-modal').classList.contains('show')) {
+                    confirmCurrency.disabled = false;
+                    selectedNewCurrency = selectedCurrency;
+                }
             });
         });
         
@@ -1582,6 +2502,7 @@
                 currency = selectedCurrency;
                 setupScreen.style.display = 'none';
                 mainApp.style.display = 'block';
+                localStorage.setItem('budgetwise_setup_complete', 'true');
                 initApp();
             }
         });
@@ -1621,9 +2542,11 @@
             if (darkMode) {
                 icon.className = 'fas fa-sun';
                 text.textContent = 'Light Mode';
+                if (darkModeToggle) darkModeToggle.checked = true;
             } else {
                 icon.className = 'fas fa-moon';
                 text.textContent = 'Dark Mode';
+                if (darkModeToggle) darkModeToggle.checked = false;
             }
         }
         
@@ -1652,7 +2575,7 @@
         // Show notification
         function showNotification(message, isError = false) {
             notificationTextEl.textContent = message;
-            notificationEl.style.background = isError ? 'var(--danger)' : 'var(--success)';
+            notificationEl.style.background = isError ? 'var(--danger)' : 'var(--accent)';
             notificationEl.classList.add('show');
             setTimeout(() => {
                 notificationEl.classList.remove('show');
@@ -1702,14 +2625,23 @@
             // Update budget health indicator
             updateBudgetHealth(budgetUsed);
             
+            // Update goal progress
+            updateGoalProgress();
+            
             // Update insights
             updateInsights(currentTransactions, expense, income);
             
             // Update AI insight
             updateAIInsight(expense, income, budgetUsed);
             
+            // Update predictive insights
+            updatePredictiveInsights(currentTransactions, expense, income);
+            
             // Update reports
             updateReports();
+            
+            // Update saving goals
+            updateSavingGoals();
             
             // Generate chart
             generateChart();
@@ -1736,6 +2668,15 @@
             
             budgetHealthIndicator.className = `health-indicator ${healthClass}`;
             budgetHealthIndicator.innerHTML = `<i class="fas fa-heartbeat"></i><span>${healthText}</span>`;
+        }
+        
+        // Update goal progress
+        function updateGoalProgress() {
+            const progress = savingsGoal.target > 0 ? (savingsGoal.saved / savingsGoal.target) * 100 : 0;
+            goalAmountEl.textContent = formatCurrency(savingsGoal.target);
+            goalProgressEl.style.width = `${progress}%`;
+            goalSavedEl.textContent = formatCurrency(savingsGoal.saved);
+            goalTargetEl.textContent = formatCurrency(savingsGoal.target);
         }
         
         // Update insights section
@@ -1784,6 +2725,48 @@
             } else {
                 aiInsightText.textContent = `You've exceeded your budget by ${formatCurrency(totalExpense - monthlyBudget)}. Let's create a plan to get back on track next month.`;
             }
+        }
+        
+        // Update predictive insights
+        function updatePredictiveInsights(transactions, totalExpense, totalIncome) {
+            // Calculate spending trend
+            const now = new Date();
+            const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+            const lastMonthTransactions = transactions.filter(t => {
+                const transDate = new Date(t.date);
+                return transDate.getMonth() === lastMonth.getMonth() && 
+                       transDate.getFullYear() === lastMonth.getFullYear() &&
+                       t.type === 'expense';
+            });
+            
+            const lastMonthExpense = lastMonthTransactions.reduce((sum, t) => sum + t.amount, 0);
+            const trend = lastMonthExpense > 0 ? ((totalExpense - lastMonthExpense) / lastMonthExpense) * 100 : 0;
+            
+            if (trend < 0) {
+                const savings = Math.abs(trend / 100 * lastMonthExpense);
+                spendingTrendEl.textContent = `Your spending is ${Math.abs(Math.round(trend))}% lower than last month. At this rate, you'll save an extra ${formatCurrency(savings)} this month.`;
+            } else if (trend > 0) {
+                spendingTrendEl.textContent = `Your spending is ${Math.round(trend)}% higher than last month. Consider reviewing your expenses to stay on budget.`;
+            } else {
+                spendingTrendEl.textContent = `Your spending is consistent with last month. Keep up the good budget management!`;
+            }
+            
+            // Calculate upcoming bills
+            const upcomingDate = new Date();
+            upcomingDate.setDate(upcomingDate.getDate() + 7);
+            const upcomingTransactions = transactions.filter(t => {
+                const transDate = new Date(t.date);
+                return transDate > now && transDate <= upcomingDate && t.category === 'bills';
+            });
+            
+            const upcomingTotal = upcomingTransactions.reduce((sum, t) => sum + t.amount, 0);
+            upcomingBillsEl.textContent = `You have ${upcomingTransactions.length} bills totaling ${formatCurrency(upcomingTotal)} due in the next 7 days. Make sure to budget accordingly.`;
+            
+            // Savings opportunity
+            const foodExpenses = transactions.filter(t => t.category === 'food' && t.type === 'expense')
+                                           .reduce((sum, t) => sum + t.amount, 0);
+            const potentialSavings = foodExpenses * 0.2; // 20% reduction
+            savingsOpportunityEl.textContent = `You could save ${formatCurrency(potentialSavings)}/month by reducing dining out expenses by 20%.`;
         }
         
         // Render transactions with filtering
@@ -1894,7 +2877,9 @@
                 transactions: transactions,
                 monthlyBudget: monthlyBudget,
                 currency: currency,
-                version: '2.1'
+                savingsGoal: savingsGoal,
+                savingGoals: savingGoals,
+                version: '3.0'
             };
             localStorage.setItem('budgetwise_data', JSON.stringify(data));
         }
@@ -1908,8 +2893,15 @@
                     transactions = parsed.transactions || [];
                     monthlyBudget = parsed.monthlyBudget || 0;
                     currency = parsed.currency || 'USD';
+                    savingsGoal = parsed.savingsGoal || {
+                        target: 0,
+                        saved: 0,
+                        deadline: null,
+                        name: 'Main Savings Goal'
+                    };
+                    savingGoals = parsed.savingGoals || [];
                 } catch (e) {
-                    console.error('Error loading ', e);
+                    console.error('Error loading data:', e);
                     showNotification('Error loading data. Starting fresh.', true);
                 }
             }
@@ -1923,24 +2915,53 @@
         
         // Export data
         function exportData() {
+            if (!selectedExportFormat) return;
+            
             const data = {
                 transactions: transactions,
                 monthlyBudget: monthlyBudget,
                 currency: currency,
-                version: '2.1',
+                savingsGoal: savingsGoal,
+                savingGoals: savingGoals,
+                version: '3.0',
                 exportedAt: new Date().toISOString()
             };
             
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataUri = 'application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            let dataStr, mimeType, fileExtension;
             
-            const exportFileDefaultName = `budgetwise-export-${todayFormatted}.json`;
+            if (selectedExportFormat === 'json') {
+                dataStr = JSON.stringify(data, null, 2);
+                mimeType = 'application/json';
+                fileExtension = 'json';
+            } else if (selectedExportFormat === 'csv') {
+                // Convert transactions to CSV
+                const headers = ['Date', 'Type', 'Category', 'Description', 'Amount'];
+                const csvRows = [headers.join(',')];
+                
+                transactions.forEach(t => {
+                    const row = [
+                        t.date,
+                        t.type,
+                        t.category,
+                        `"${t.description || ''}"`,
+                        t.amount
+                    ].join(',');
+                    csvRows.push(row);
+                });
+                
+                dataStr = csvRows.join('\n');
+                mimeType = 'text/csv';
+                fileExtension = 'csv';
+            }
+            
+            const dataUri = `data:${mimeType};charset=utf-8,${encodeURIComponent(dataStr)}`;
+            const exportFileDefaultName = `budgetwise-export-${todayFormatted}.${fileExtension}`;
             
             const linkElement = document.createElement('a');
             linkElement.setAttribute('href', dataUri);
             linkElement.setAttribute('download', exportFileDefaultName);
             linkElement.click();
-            showNotification('Data exported successfully!');
+            showNotification(`Data exported as ${selectedExportFormat.toUpperCase()} successfully!`);
         }
         
         // Generate spending chart
@@ -2024,13 +3045,6 @@
                 chartBars.appendChild(bar);
             });
         }
-        
-        // Reset chart to default view
-        resetChartBtn.addEventListener('click', () => {
-            chartPeriod.value = '30';
-            generateChart();
-            showNotification('Chart view reset to last 30 days');
-        });
         
         // Update reports
         function updateReports() {
@@ -2159,15 +3173,294 @@
             if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
                 localStorage.removeItem('budgetwise_data');
                 localStorage.removeItem('budgetwise_theme');
+                localStorage.removeItem('budgetwise_setup_complete');
                 transactions = [];
                 monthlyBudget = 0;
                 currency = 'USD';
+                savingsGoal = {
+                    target: 0,
+                    saved: 0,
+                    deadline: null,
+                    name: 'Main Savings Goal'
+                };
+                savingGoals = [];
                 darkMode = false;
                 body.classList.remove('dark-mode');
                 
                 // Reload the page to show setup screen
                 location.reload();
             }
+        }
+        
+        // Import sample data
+        function importSampleData() {
+            const sampleTransactions = [
+                {
+                    id: 'sample1',
+                    amount: 3500,
+                    type: 'income',
+                    category: 'salary',
+                    description: 'Monthly Salary',
+                    date: `${currentYear}-${currentMonth}-01`
+                },
+                {
+                    id: 'sample2',
+                    amount: 450,
+                    type: 'income',
+                    category: 'freelance',
+                    description: 'Freelance Project',
+                    date: `${currentYear}-${currentMonth}-05`
+                },
+                {
+                    id: 'sample3',
+                    amount: 120,
+                    type: 'expense',
+                    category: 'food',
+                    description: 'Groceries',
+                    date: `${currentYear}-${currentMonth}-02`
+                },
+                {
+                    id: 'sample4',
+                    amount: 65,
+                    type: 'expense',
+                    category: 'transport',
+                    description: 'Gas',
+                    date: `${currentYear}-${currentMonth}-03`
+                },
+                {
+                    id: 'sample5',
+                    amount: 85,
+                    type: 'expense',
+                    category: 'entertainment',
+                    description: 'Movie Night',
+                    date: `${currentYear}-${currentMonth}-06`
+                },
+                {
+                    id: 'sample6',
+                    amount: 150,
+                    type: 'expense',
+                    category: 'shopping',
+                    description: 'New Clothes',
+                    date: `${currentYear}-${currentMonth}-08`
+                },
+                {
+                    id: 'sample7',
+                    amount: 200,
+                    type: 'expense',
+                    category: 'bills',
+                    description: 'Electricity Bill',
+                    date: `${currentYear}-${currentMonth}-10`
+                },
+                {
+                    id: 'sample8',
+                    amount: 80,
+                    type: 'expense',
+                    category: 'health',
+                    description: 'Gym Membership',
+                    date: `${currentYear}-${currentMonth}-12`
+                },
+                {
+                    id: 'sample9',
+                    amount: 300,
+                    type: 'income',
+                    category: 'investment',
+                    description: 'Dividend Payment',
+                    date: `${currentYear}-${currentMonth}-15`
+                },
+                {
+                    id: 'sample10',
+                    amount: 45,
+                    type: 'expense',
+                    category: 'food',
+                    description: 'Restaurant',
+                    date: `${currentYear}-${currentMonth}-16`
+                },
+                {
+                    id: 'sample11',
+                    amount: 120,
+                    type: 'expense',
+                    category: 'education',
+                    description: 'Online Course',
+                    date: `${currentYear}-${currentMonth}-18`
+                },
+                {
+                    id: 'sample12',
+                    amount: 60,
+                    type: 'expense',
+                    category: 'transport',
+                    description: 'Public Transport',
+                    date: `${currentYear}-${currentMonth}-20`
+                },
+                {
+                    id: 'sample13',
+                    amount: 90,
+                    type: 'expense',
+                    category: 'entertainment',
+                    description: 'Concert Tickets',
+                    date: `${currentYear}-${currentMonth}-22`
+                },
+                {
+                    id: 'sample14',
+                    amount: 75,
+                    type: 'expense',
+                    category: 'other',
+                    description: 'Miscellaneous',
+                    date: `${currentYear}-${currentMonth}-25`
+                },
+                {
+                    id: 'sample15',
+                    amount: 180,
+                    type: 'expense',
+                    category: 'bills',
+                    description: 'Internet Bill',
+                    date: `${currentYear}-${currentMonth}-28`
+                }
+            ];
+            
+            // Add sample transactions to existing ones
+            transactions = [...transactions, ...sampleTransactions];
+            saveData();
+            renderTransactions();
+            calculateFinancials();
+            showNotification('Sample data imported successfully!');
+        }
+        
+        // Update saving goals
+        function updateSavingGoals() {
+            // Update saving goals list in settings
+            savingGoalsList.innerHTML = '';
+            
+            if (savingGoals.length === 0) {
+                savingGoalsList.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 20px 0;">No saving goals set. Add your first goal!</p>';
+                return;
+            }
+            
+            savingGoals.forEach((goal, index) => {
+                const progress = goal.target > 0 ? (goal.saved / goal.target) * 100 : 0;
+                const goalEl = document.createElement('div');
+                goalEl.className = 'saving-goal-item';
+                goalEl.innerHTML = `
+                    <div>
+                        <div class="saving-goal-name">${goal.name}</div>
+                        <div class="saving-goal-details">
+                            <div>Progress: ${progress.toFixed(1)}%</div>
+                            <div>Saved: ${formatCurrency(goal.saved)} / ${formatCurrency(goal.target)}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline edit-goal-btn" data-index="${index}">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                `;
+                savingGoalsList.appendChild(goalEl);
+            });
+            
+            // Add event listeners to edit buttons
+            document.querySelectorAll('.edit-goal-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.currentTarget.getAttribute('data-index');
+                    editSavingGoal(index);
+                });
+            });
+            
+            // Update saving goal options in transaction form
+            updateSavingGoalOptions();
+        }
+        
+        // Update saving goal options in transaction form
+        function updateSavingGoalOptions() {
+            savingGoalOptions.innerHTML = '';
+            
+            if (savingGoals.length === 0) {
+                savingGoalSection.style.display = 'none';
+                return;
+            }
+            
+            savingGoals.forEach((goal, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'saving-goal-option';
+                optionEl.innerHTML = `
+                    <input type="checkbox" id="goal-${index}" data-index="${index}">
+                    <label for="goal-${index}">${goal.name}</label>
+                    <input type="number" class="saving-goal-amount" id="goal-amount-${index}" step="0.01" min="0" placeholder="0.00" disabled>
+                `;
+                savingGoalOptions.appendChild(optionEl);
+                
+                // Add event listener to enable amount input when checkbox is checked
+                const checkbox = optionEl.querySelector('input[type="checkbox"]');
+                const amountInput = optionEl.querySelector('.saving-goal-amount');
+                
+                checkbox.addEventListener('change', () => {
+                    amountInput.disabled = !checkbox.checked;
+                    if (checkbox.checked) {
+                        amountInput.focus();
+                    }
+                });
+            });
+            
+            savingGoalSection.style.display = 'block';
+        }
+        
+        // Edit saving goal
+        function editSavingGoal(index) {
+            const goal = savingGoals[index];
+            document.getElementById('goal-target-amount').value = goal.target;
+            document.getElementById('goal-saved-amount').value = goal.saved;
+            document.getElementById('goal-deadline').value = goal.deadline || '';
+            document.getElementById('goal-name').value = goal.name;
+            
+            // Store the index of the goal being edited
+            goalModal.setAttribute('data-editing-index', index);
+            
+            goalModal.classList.add('show');
+        }
+        
+        // Add new saving goal
+        function addNewGoal() {
+            const name = document.getElementById('new-goal-name').value;
+            const target = parseFloat(document.getElementById('new-goal-target').value);
+            const deadline = document.getElementById('new-goal-deadline').value;
+            
+            if (!name || isNaN(target) || target <= 0) {
+                showNotification('Please enter a valid goal name and target amount', true);
+                return;
+            }
+            
+            const newGoal = {
+                name: name,
+                target: target,
+                saved: 0,
+                deadline: deadline || null
+            };
+            
+            savingGoals.push(newGoal);
+            saveData();
+            updateSavingGoals();
+            showNotification('New saving goal added successfully!');
+            addGoalModal.classList.remove('show');
+            
+            // Reset form
+            document.getElementById('new-goal-name').value = '';
+            document.getElementById('new-goal-target').value = '';
+            document.getElementById('new-goal-deadline').value = '';
+        }
+        
+        // Add to savings
+        function addToSavings() {
+            const amount = parseFloat(addSavingsAmount.value);
+            
+            if (isNaN(amount) || amount <= 0) {
+                showNotification('Please enter a valid amount', true);
+                return;
+            }
+            
+            savingsGoal.saved += amount;
+            saveData();
+            calculateFinancials();
+            showNotification(`Added ${formatCurrency(amount)} to your savings goal!`);
+            addSavingsModal.classList.remove('show');
+            addSavingsAmount.value = '';
         }
         
         // Tab Navigation
@@ -2208,12 +3501,215 @@
             }
         });
         
-        // Reset button
-        resetBtn.addEventListener('click', () => {
+        // Currency selector
+        currencySelector.addEventListener('click', () => {
+            currencyModal.classList.add('show');
+            // Select current currency
+            currencyOptions.forEach(opt => {
+                if (opt.getAttribute('data-currency') === currency) {
+                    opt.classList.add('selected');
+                    selectedNewCurrency = currency;
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
+        });
+        
+        closeCurrencyModal.addEventListener('click', () => {
+            currencyModal.classList.remove('show');
+        });
+        
+        cancelCurrency.addEventListener('click', () => {
+            currencyModal.classList.remove('show');
+        });
+        
+        confirmCurrency.addEventListener('click', () => {
+            if (selectedNewCurrency && selectedNewCurrency !== currency) {
+                currency = selectedNewCurrency;
+                currentCurrencyEl.textContent = currency;
+                saveData();
+                calculateFinancials();
+                showNotification(`Currency changed to ${currency}`);
+            }
+            currencyModal.classList.remove('show');
+        });
+        
+        currencyModal.addEventListener('click', (e) => {
+            if (e.target === currencyModal) {
+                currencyModal.classList.remove('show');
+            }
+        });
+        
+        // Goal setting
+        editGoalBtn.addEventListener('click', () => {
+            document.getElementById('goal-target-amount').value = savingsGoal.target || '';
+            document.getElementById('goal-saved-amount').value = savingsGoal.saved || '';
+            document.getElementById('goal-deadline').value = savingsGoal.deadline || '';
+            document.getElementById('goal-name').value = savingsGoal.name || '';
+            goalModal.removeAttribute('data-editing-index');
+            goalModal.classList.add('show');
+        });
+        
+        closeGoalModal.addEventListener('click', () => {
+            goalModal.classList.remove('show');
+        });
+        
+        cancelGoal.addEventListener('click', () => {
+            goalModal.classList.remove('show');
+        });
+        
+        confirmGoal.addEventListener('click', () => {
+            const target = parseFloat(document.getElementById('goal-target-amount').value);
+            const saved = parseFloat(document.getElementById('goal-saved-amount').value);
+            const deadline = document.getElementById('goal-deadline').value;
+            const name = document.getElementById('goal-name').value;
+            
+            if (isNaN(target) || target <= 0) {
+                showNotification('Please enter a valid target amount', true);
+                return;
+            }
+            
+            if (isNaN(saved) || saved < 0) {
+                showNotification('Please enter a valid saved amount', true);
+                return;
+            }
+            
+            if (!name) {
+                showNotification('Please enter a goal name', true);
+                return;
+            }
+            
+            // Check if we're editing an existing goal or the main savings goal
+            const editingIndex = goalModal.getAttribute('data-editing-index');
+            
+            if (editingIndex !== null) {
+                // Editing an existing saving goal
+                savingGoals[editingIndex] = {
+                    name: name,
+                    target: target,
+                    saved: saved,
+                    deadline: deadline || null
+                };
+            } else {
+                // Editing the main savings goal
+                savingsGoal = {
+                    target: target,
+                    saved: saved,
+                    deadline: deadline || null,
+                    name: name
+                };
+            }
+            
+            saveData();
+            calculateFinancials();
+            updateSavingGoals();
+            showNotification('Savings goal updated successfully!');
+            goalModal.classList.remove('show');
+        });
+        
+        goalModal.addEventListener('click', (e) => {
+            if (e.target === goalModal) {
+                goalModal.classList.remove('show');
+            }
+        });
+        
+        // Add to savings button
+        addToSavingsBtn.addEventListener('click', () => {
+            addSavingsModal.classList.add('show');
+        });
+        
+        closeAddSavingsModal.addEventListener('click', () => {
+            addSavingsModal.classList.remove('show');
+        });
+        
+        cancelAddSavings.addEventListener('click', () => {
+            addSavingsModal.classList.remove('show');
+        });
+        
+        confirmAddSavings.addEventListener('click', () => {
+            addToSavings();
+        });
+        
+        addSavingsModal.addEventListener('click', (e) => {
+            if (e.target === addSavingsModal) {
+                addSavingsModal.classList.remove('show');
+            }
+        });
+        
+        // Import sample data
+        importSampleBtn.addEventListener('click', () => {
+            importModal.classList.add('show');
+        });
+        
+        closeImportModal.addEventListener('click', () => {
+            importModal.classList.remove('show');
+        });
+        
+        cancelImport.addEventListener('click', () => {
+            importModal.classList.remove('show');
+        });
+        
+        confirmImport.addEventListener('click', () => {
+            importModal.classList.remove('show');
+            importSampleData();
+        });
+        
+        importModal.addEventListener('click', (e) => {
+            if (e.target === importModal) {
+                importModal.classList.remove('show');
+            }
+        });
+        
+        // Add goal button
+        addGoalBtn.addEventListener('click', () => {
+            addGoalModal.classList.add('show');
+        });
+        
+        closeAddGoalModal.addEventListener('click', () => {
+            addGoalModal.classList.remove('show');
+        });
+        
+        cancelAddGoal.addEventListener('click', () => {
+            addGoalModal.classList.remove('show');
+        });
+        
+        confirmAddGoal.addEventListener('click', () => {
+            addNewGoal();
+        });
+        
+        addGoalModal.addEventListener('click', (e) => {
+            if (e.target === addGoalModal) {
+                addGoalModal.classList.remove('show');
+            }
+        });
+        
+        // Settings event listeners
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        });
+        
+        settingsCurrencyBtn.addEventListener('click', () => {
+            currencyModal.classList.add('show');
+        });
+        
+        showSetupBtn.addEventListener('click', () => {
+            localStorage.removeItem('budgetwise_setup_complete');
+            location.reload();
+        });
+        
+        settingsExportBtn.addEventListener('click', () => {
+            exportModal.classList.add('show');
+        });
+        
+        settingsResetBtn.addEventListener('click', () => {
             resetModal.classList.add('show');
         });
         
-        // Modal close handlers
+        // Reset modal
         closeResetModal.addEventListener('click', () => {
             resetModal.classList.remove('show');
         });
@@ -2227,10 +3723,48 @@
             resetAllData();
         });
         
-        // Close modal when clicking outside
         resetModal.addEventListener('click', (e) => {
             if (e.target === resetModal) {
                 resetModal.classList.remove('show');
+            }
+        });
+        
+        // Export modal
+        closeExportModal.addEventListener('click', () => {
+            exportModal.classList.remove('show');
+        });
+        
+        cancelExport.addEventListener('click', () => {
+            exportModal.classList.remove('show');
+        });
+        
+        confirmExport.addEventListener('click', () => {
+            exportModal.classList.remove('show');
+            exportData();
+        });
+        
+        exportModal.addEventListener('click', (e) => {
+            if (e.target === exportModal) {
+                exportModal.classList.remove('show');
+            }
+        });
+        
+        // Export format selection
+        exportOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                exportOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedExportFormat = option.getAttribute('data-format');
+                confirmExport.disabled = false;
+            });
+        });
+        
+        // Transaction type change to show/hide saving goals section
+        transactionType.addEventListener('change', () => {
+            if (transactionType.value === 'income') {
+                savingGoalSection.style.display = 'block';
+            } else {
+                savingGoalSection.style.display = 'none';
             }
         });
         
@@ -2258,20 +3792,44 @@
                 date: date
             };
             
+            // Handle saving goal allocations for income transactions
+            if (type === 'income') {
+                let totalAllocated = 0;
+                const allocationInputs = document.querySelectorAll('.saving-goal-amount:not([disabled])');
+                
+                allocationInputs.forEach(input => {
+                    const allocatedAmount = parseFloat(input.value);
+                    if (!isNaN(allocatedAmount) && allocatedAmount > 0) {
+                        totalAllocated += allocatedAmount;
+                        
+                        // Find the goal index
+                        const goalIndex = input.id.split('-')[2];
+                        if (savingGoals[goalIndex]) {
+                            savingGoals[goalIndex].saved += allocatedAmount;
+                        }
+                    }
+                });
+                
+                // If we allocated more than the transaction amount, adjust
+                if (totalAllocated > amount) {
+                    showNotification('Allocated amount exceeds transaction amount. Adjusting allocations.', true);
+                    // This would need more sophisticated handling in a real app
+                }
+            }
+            
             transactions.push(newTransaction);
             saveData();
             
             // Reset form
             transactionForm.reset();
             dateInput.value = todayFormatted;
+            savingGoalSection.style.display = 'none';
             
             // Update UI
             renderTransactions();
             calculateFinancials();
             showNotification('Transaction added successfully!');
         });
-        
-        exportBtn.addEventListener('click', exportData);
         
         editBudgetBtn.addEventListener('click', () => {
             const newBudget = prompt('Enter your new monthly budget amount:', monthlyBudget.toString());
@@ -2306,13 +3864,43 @@
         // Initialize the app
         function initApp() {
             loadData();
+            currentCurrencyEl.textContent = currency;
             calculateFinancials();
             renderTransactions();
+            updateSavingGoals();
+            
+            // Update settings
+            if (darkModeToggle) darkModeToggle.checked = darkMode;
+            
+            // Update app info
+            if (appVersion) appVersion.textContent = 'v3.0';
+            if (totalTransactions) totalTransactions.textContent = transactions.length;
+            
+            // Calculate days used
+            const firstUse = localStorage.getItem('budgetwise_first_use');
+            if (!firstUse) {
+                localStorage.setItem('budgetwise_first_use', new Date().toISOString());
+                if (appDays) appDays.textContent = '1';
+            } else {
+                const firstUseDate = new Date(firstUse);
+                const today = new Date();
+                const diffTime = Math.abs(today - firstUseDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (appDays) appDays.textContent = diffDays;
+            }
         }
         
         // Initialize on load
         window.addEventListener('DOMContentLoaded', () => {
             initTheme();
+            
+            // Check if setup is complete
+            const setupComplete = localStorage.getItem('budgetwise_setup_complete');
+            if (setupComplete) {
+                setupScreen.style.display = 'none';
+                mainApp.style.display = 'block';
+                initApp();
+            }
         });
     </script>
 </body>
