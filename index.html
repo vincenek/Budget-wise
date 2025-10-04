@@ -62,9 +62,10 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 16px 90px;
+            position: relative;
         }
         
-        /* Header - Redesigned */
+        /* Header - Fixed */
         .header {
             display: flex;
             justify-content: space-between;
@@ -72,14 +73,21 @@
             margin-bottom: 28px;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 0 8px;
-            position: sticky;
+            padding: 20px 16px;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             background: var(--card-bg);
-            padding: 20px 0;
-            border-radius: var(--border-radius);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
             box-shadow: var(--card-shadow);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-spacer {
+            height: 120px; /* Adjust based on your header height */
         }
         
         .logo {
@@ -907,7 +915,11 @@
             }
             
             .header {
-                padding: 0 4px;
+                padding: 15px 12px;
+            }
+            
+            .header-spacer {
+                height: 100px;
             }
             
             .logo-text {
@@ -948,6 +960,11 @@
                 flex-direction: column;
                 align-items: stretch;
                 gap: 15px;
+                padding: 15px 12px;
+            }
+            
+            .header-spacer {
+                height: 140px;
             }
             
             .header-actions {
@@ -1657,7 +1674,7 @@
     
     <!-- Main App (hidden initially) -->
     <div class="container" id="main-app" style="display:none;">
-        <!-- Header - Redesigned -->
+        <!-- Header - Fixed -->
         <div class="header">
             <div class="logo">
                 <div class="logo-icon">
@@ -1676,6 +1693,9 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Spacer to push content below fixed header -->
+        <div class="header-spacer"></div>
         
         <!-- Dashboard Tab -->
         <div class="tab-content active" id="dashboard-tab">
